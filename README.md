@@ -1,4 +1,4 @@
-# scrappy-ddns
+# docker-scrappy-ddns
 Runs [Scrappy DDNS](https://github.com/rhasselbaum/scrappy-ddns) in a Docker container with SSL/TLS support out of the box. Scrappy DDNS is a Dynamic DNS-like service that sends push notifications to your mobile devices whenever your public IP address changes. From the [project description](https://github.com/rhasselbaum/scrappy-ddns):
 
 > So what good is a DDNS service that doesn't actually update DNS records? Scrappy might be right for you if:
