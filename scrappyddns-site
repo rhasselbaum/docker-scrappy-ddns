@@ -1,0 +1,24 @@
+# nginx reverse proxy sits between the Python WSGI server (Waitress) and the big scary Internet.
+# We listen for HTTPS connections ONLY! Tokens should never be sent unencrypted.
+
+server {
+	listen 443 ssl;
+
+        access_log off;
+        error_log /dev/stdout;
+	
+	ssl_certificate /etc/scrappyddns/cert.pem;
+	ssl_certificate_key /etc/scrappyddns/cert.key;
+	ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+	ssl_ciphers "HIGH:!aNULL:!MD5 or HIGH:!aNULL:!MD5:!3DES";
+	ssl_prefer_server_ciphers on;
+	
+	location / {
+            proxy_pass         http://127.0.0.1:8000/;
+            proxy_redirect     off;
+
+            proxy_set_header   Host             $host;
+            proxy_set_header   X-Real-IP        $remote_addr;
+            proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+        }
+}
