@@ -33,7 +33,9 @@ RUN unzip /scrappy-ddns.zip && \
  # Set IP_ADDRESS_CACHE=/var/cache/scrappyddns in embedded config file
  sed -e "s:\([#[:space:]]*\)\(IP_ADDRESS_CACHE\)\(.*\):\2='/var/cache/scrappyddns':" -i /scrappyddns/scrappyddns.conf && \
  # Set TOKEN_FILE=/etc/scrappyddns/token.list in embedded config file
- sed -e "s:\([#[:space:]]*\)\(TOKEN_FILE\)\(.*\):\2='/etc/scrappyddns/token.list':" -i /scrappyddns/scrappyddns.conf
+ sed -e "s:\([#[:space:]]*\)\(TOKEN_FILE\)\(.*\):\2='/etc/scrappyddns/token.list':" -i /scrappyddns/scrappyddns.conf && \
+ # Set PROXY_COUNT=1 in embedded config file
+ sed -e "s:\([#[:space:]]*\)\(PROXY_COUNT\)\(.*\):\2=1:" -i /scrappyddns/scrappyddns.conf
 
 # Locations of IP address cache and external config. Cache must be writable by www-data user (UID/GID 33).
 VOLUME ["/var/cache/scrappyddns", "/etc/scrappyddns"] 
